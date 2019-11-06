@@ -29,6 +29,6 @@ public class addToListTest {
         Classroom classroom = new Classroom();
 
         classroom.addStudent("Jeremy", "Davis");
-        assertNotNull("Student doesen't exist", classroom.getStudent("JeremyDavis"));
+        assertNotNull("Student doesn't exist", classroom.getStudent("JeremyDavis"));
     }
 }

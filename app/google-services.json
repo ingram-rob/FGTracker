@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1077957458357",
+    "firebase_url": "https://my-first-project-e2f75.firebaseio.com",
+    "project_id": "my-first-project-e2f75",
+    "storage_bucket": "my-first-project-e2f75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1077957458357:android:fb4fdee6e8a22c986841fc",
+        "android_client_info": {
+          "package_name": "com.inurpocketapps.fgtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1077957458357-v4r3v4sk9j0hikq9nba1cu2aoju0jc8b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAurMvyrEjfwcfcjvETo3NlO7va_Wij1Mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1077957458357-v4r3v4sk9j0hikq9nba1cu2aoju0jc8b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
