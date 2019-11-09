@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CustomListAdapter extends RecyclerView.Adapter {
+public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.MyViewHolder> {
     @NonNull
     ArrayList schoolNames;
     Context context;
@@ -41,8 +41,15 @@ public class CustomListAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    public void onBindViewHolder (@NonNull CustomListAdapter.MyViewHolder holder, int position) {
         holder.text.setText(schoolNames.get(position).toString());
+        // implement setOnClickListener event on item view.
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override
