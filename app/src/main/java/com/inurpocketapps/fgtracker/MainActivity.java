@@ -1,8 +1,10 @@
 package com.inurpocketapps.fgtracker;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
     // Dallin made this comment
@@ -11,5 +13,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        RecyclerView resView = findViewById(R.id.mainResView);
+
+        // Use a linear layout manager for the RecyclerView
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        resView.setLayoutManager(layoutManager);
     }
 }
