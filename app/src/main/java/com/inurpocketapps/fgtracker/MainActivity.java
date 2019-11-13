@@ -1,6 +1,9 @@
 package com.inurpocketapps.fgtracker;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,5 +21,19 @@ public class MainActivity extends AppCompatActivity {
         // Use a linear layout manager for the RecyclerView
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         resView.setLayoutManager(layoutManager);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
+        String email = pref.getString("Email", "null");
+        System.out.println(email);
+    }
+
+    @Override
+    protected void onStop () {
+        super.onStop();
+        String email = "blabla@yahoo.com";
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putString("Email", email);
+        edit.apply();
     }
 }
