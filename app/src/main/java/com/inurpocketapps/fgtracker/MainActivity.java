@@ -9,9 +9,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
-    // Dallin made this comment
-    // Rob Made this comment
+
+    //Array to store all schools
+    private List <School> schools = new ArrayList<School>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
         String email = pref.getString("Email", "null");
         System.out.println(email);
+
     }
 
     @Override
@@ -35,5 +43,10 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor edit = pref.edit();
         edit.putString("Email", email);
         edit.apply();
+    }
+
+    //onClick method to add a new school.
+    public void addSchool (String name){
+        schools.add(new School(name));
     }
 }

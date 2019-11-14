@@ -3,11 +3,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Student {
+    private String first;
+    private String middle;
+    private String last;
+    private String birthDate;
     private Map<String, Integer> testList;
 
     //Default constructor
     //all it needs to do for now is initialize testList
-    public Student() {
+    public Student(String first, String middle, String last, String birthDate) {
+        this.first = first;
+        this.middle = middle;
+        this.last = last;
+        this.birthDate = birthDate;
         testList = new HashMap<String, Integer>();
     }
 
