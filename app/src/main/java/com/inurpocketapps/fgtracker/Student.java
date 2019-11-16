@@ -1,16 +1,14 @@
 package com.inurpocketapps.fgtracker;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Student {
     private String first;
     private String middle;
     private String last;
-    private String birthDate;
-    private List<FitnessTest> testList;
-    private int weight;
-    private int heightFeet;
-    private int heightInches;
+    private String id;
+    private String dob;
+    private Map<String, Integer> testList;
 
     //Default constructor
     //all it needs to do for now is initialize testList
@@ -19,58 +17,40 @@ public class Student {
         this.middle = middle;
         this.last = last;
         this.birthDate = birthDate;
-        testList = new ArrayList<FitnessTest>();
+        testList = new HashMap<String, Integer>();
     }
 
-    public List<FitnessTest> getTestList() {
+    public Map<String, Integer> getTestList() {
         return testList;
     }
 
-    public void setTestList(List<FitnessTest> testList) {
+    public void setTest(Map<String, Integer> testList) {
         this.testList = testList;
     }
 
-    public void addTest(FitnessTest test) {
-        testList.add(test);
+    //add data for a test, should create a new field for the test
+    //if it does not already have a field in the map
+    public void addTest(String testKey, int testValue) {
+        testList.put(testKey, testValue);
     }
 
-    public FitnessTest getTest(int i) {
-        return testList.get(i);
+    //add a field to the map for a test without providing any results
+    public void addTest(String testKey) {
+        testList.put(testKey, 0);
+    }
+
+    //get test data from the map, requires a valid key
+    public int getTest(String test) {
+        Integer data = testList.get(test);
+        if(data == null) {
+            return 0;
+        }
+        else {
+            return data;
+        }
     }
 
     public String getName () {
         return first + " " + middle + " " + last;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public int getHeightFeet() {
-        return heightFeet;
-    }
-
-    public int getHeightInches() {
-        return heightInches;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setHeightFeet(int heightFeet) {
-        this.heightFeet = heightFeet;
-    }
-
-    public void setHeightInches(int heightInches) {
-        this.heightInches = heightInches;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
     }
 }
