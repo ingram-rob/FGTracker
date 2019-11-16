@@ -19,4 +19,8 @@ public class School {
     public void addGrade(int num) {
         grades.add(new Grade(num));
     }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <!-- Layout of items for a single row of main activity list -->
 
     <TextView
+        android:id="@+id/schoolName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/schoolName"
-        android:layout_margin="10dp"
         android:textColor="#000"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        tools:layout_conversion_absoluteHeight="27dp"
+        tools:layout_conversion_absoluteWidth="0dp"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="10dp" />
 
 </LinearLayout>

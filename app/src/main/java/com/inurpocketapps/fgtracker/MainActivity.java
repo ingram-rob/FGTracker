@@ -3,6 +3,7 @@ package com.inurpocketapps.fgtracker;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Array to store all schools
     private List <School> schools = new ArrayList<School>();
+    private SchoolAdapter adapt = new SchoolAdapter(schools);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         // Use a linear layout manager for the RecyclerView
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         resView.setLayoutManager(layoutManager);
+        resView.setAdapter(adapt);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
         String email = pref.getString("Email", "null");
@@ -46,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //onClick method to add a new school.
-    public void addSchool (String name){
-        schools.add(new School(name));
+    public void addSchool (View view){
+        schools.add(new School("Bla School"));
+        adapt.notifyDataSetChanged();
     }
 }
