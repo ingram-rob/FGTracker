@@ -48,4 +48,8 @@ public class Student {
             return data;
         }
     }
+
+    public String getName () {
+        return first + " " + middle + " " + last;
+    }
 }

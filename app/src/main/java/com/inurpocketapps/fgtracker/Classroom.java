@@ -20,4 +20,8 @@ public class Classroom {
     public void addStudent(String first, String middle, String last, String birthDate) {
         students.add(new Student(first, middle, last, birthDate));
     }
+
+    public String getName() {
+        return name;
+    }
 }
