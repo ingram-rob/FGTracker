@@ -1,56 +1,95 @@
 package com.inurpocketapps.fgtracker;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Student {
     private String first;
     private String middle;
     private String last;
     private String id;
-    private String dob;
-    private Map<String, Integer> testList;
+    private String birthDate;
+    private List<FitnessTest> testList;
+    private int age;
+    private int weight;
+    private int heightFeet;
+    private int heightInches;
 
     //Default constructor
     //all it needs to do for now is initialize testList
-    public Student(String first, String middle, String last, String birthDate) {
+    public Student(String first, String middle, String last, String id, String birthDate) {
         this.first = first;
         this.middle = middle;
         this.last = last;
+        this.id = id;
         this.birthDate = birthDate;
-        testList = new HashMap<String, Integer>();
+        testList = new ArrayList<FitnessTest>();
     }
 
-    public Map<String, Integer> getTestList() {
+    public List<FitnessTest> getTestList() {
         return testList;
     }
 
-    public void setTest(Map<String, Integer> testList) {
+    public void setTestList(List<FitnessTest> testList) {
         this.testList = testList;
     }
 
-    //add data for a test, should create a new field for the test
-    //if it does not already have a field in the map
-    public void addTest(String testKey, int testValue) {
-        testList.put(testKey, testValue);
+    public void addTest(FitnessTest test) {
+        testList.add(test);
     }
 
-    //add a field to the map for a test without providing any results
-    public void addTest(String testKey) {
-        testList.put(testKey, 0);
-    }
-
-    //get test data from the map, requires a valid key
-    public int getTest(String test) {
-        Integer data = testList.get(test);
-        if(data == null) {
-            return 0;
-        }
-        else {
-            return data;
-        }
+    public FitnessTest getTest(int i) {
+        return testList.get(i);
     }
 
     public String getName () {
         return first + " " + middle + " " + last;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public int getHeightFeet() {
+        return heightFeet;
+    }
+
+    public int getHeightInches() {
+        return heightInches;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public String getId(){
+        return id;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setHeightFeet(int heightFeet) {
+        this.heightFeet = heightFeet;
+    }
+
+    public void setHeightInches(int heightInches) {
+        this.heightInches = heightInches;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setAge (int age) {
+        this.age = age;
+    }
+
+    public void setId (String id) {
+        this.id = id;
     }
 }
