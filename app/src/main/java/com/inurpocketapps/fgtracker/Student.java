@@ -16,7 +16,7 @@ public class Student {
 
     //Default constructor
     //all it needs to do for now is initialize testList
-    public Student(String first, String middle, String last, String id, String birthDate) {
+    public Student(String first, String middle, String last, String birthDate) {
         this.first = first;
         this.middle = middle;
         this.last = last;
