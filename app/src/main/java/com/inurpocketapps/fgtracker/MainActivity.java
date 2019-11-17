@@ -4,21 +4,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddSchoolDialog.AddStudentListener {
 
     //Array to store all schools
-    private List <School> schools = new ArrayList<School>();
+    private List <School> schools = new ArrayList<>();
     private SchoolAdapter adapt = new SchoolAdapter(schools);
 
     @Override
@@ -34,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
         String email = pref.getString("Email", "null");
-        System.out.println(email);
+        String userName = pref.getString("User", "null");
+        //System.out.println(email);
 
     }
 
@@ -42,15 +40,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop () {
         super.onStop();
         String email = "blabla@yahoo.com";
+        String userName = "testUser";
         SharedPreferences pref = getApplicationContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = pref.edit();
         edit.putString("Email", email);
+        edit.putString("User", userName);
         edit.apply();
     }
 
     //onClick method to add a new school.
     public void addSchool (View view){
-        schools.add(new School("Bla School"));
-        adapt.notifyDataSetChanged();
+        // Create Alert Dialog for School Name input
+        AddSchoolDialog addStu = new AddSchoolDialog();
+        addStu.show(getSupportFragmentManager(), "newSchool");
+    }
+
+    @Override
+    public void onDialogPositiveClick(String schoolName) {
+        School s = new School(schoolName);
+        schools.add(s);
     }
 }

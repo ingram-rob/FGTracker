@@ -2,4 +2,9 @@
     <string name="app_name">FGTracker</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="schoolPrompt">School Name</string>
+    <string name="add_school_title">Input School Name</string>
+
 </resources>

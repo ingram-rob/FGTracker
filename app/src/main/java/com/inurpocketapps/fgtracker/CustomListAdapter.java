@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.MyViewHolder> {
     @NonNull
-    ArrayList schoolNames;
-    Context context;
+    private ArrayList schoolNames;
+    private Context context;
 
     public  CustomListAdapter (Context cont, ArrayList sNames)
     {
