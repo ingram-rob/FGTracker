@@ -7,6 +7,10 @@ public class School {
     private String name;
     private List<Grade> grades;
 
+    School (){
+
+    }
+
     School (String name){
         this.name = name;
         this.grades = new ArrayList<Grade>();

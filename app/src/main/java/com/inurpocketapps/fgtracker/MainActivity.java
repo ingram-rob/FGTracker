@@ -5,18 +5,42 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AddSchoolDialog.AddStudentListener {
 
+    // Static Variables
+    private static final String USER_COL = "USERS";
+    private static final String SCHOOL_COL = "SCHOOLS";
+
+    // Persistant variables
+    private String email;
+    private String userName;
+
     //Array to store all schools
     private List <School> schools = new ArrayList<>();
     private SchoolAdapter adapt = new SchoolAdapter(schools);
+
+    // Firebase Firestore database
+    private FirebaseFirestore db;
+    private CollectionReference schoolColection;
+    private DocumentReference userDoc;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +54,17 @@ public class MainActivity extends AppCompatActivity implements AddSchoolDialog.A
         resView.setAdapter(adapt);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
-        String email = pref.getString("Email", "null");
-        String userName = pref.getString("User", "null");
+        email = pref.getString("Email", "null");
+        userName = pref.getString("User", "null");
         //System.out.println(email);
+
+        // Get the Firestore database
+        db = FirebaseFirestore.getInstance();
+        userDoc = db.collection(USER_COL).document(userName);
+        schoolColection = userDoc.collection(SCHOOL_COL);
+
+        // Initialize the school list from the database
+        initializeSchoolList();
 
     }
 
@@ -59,5 +91,23 @@ public class MainActivity extends AppCompatActivity implements AddSchoolDialog.A
     public void onDialogPositiveClick(String schoolName) {
         School s = new School(schoolName);
         schools.add(s);
+        schoolColection.document(s.getName()).set(s);
     }
+
+    private void initializeSchoolList() {
+        schoolColection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        School sk = document.toObject(School.class);
+                        schools.add(sk);
+                        adapt.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+    }
+
+
 }
