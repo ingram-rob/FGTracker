@@ -8,16 +8,20 @@ public class School {
     private List<Grade> grades;
 
     School (){
-
+        this.grades = new ArrayList<>();
     }
 
     School (String name){
         this.name = name;
-        this.grades = new ArrayList<Grade>();
+        this.grades = new ArrayList<>();
     }
 
     public Grade getGrade(int num) {
         return null;
+    }
+
+    public List<Grade> getGrades() {
+        return grades;
     }
 
     public void addGrade(int num) {

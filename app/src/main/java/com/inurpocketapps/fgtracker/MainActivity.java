@@ -33,30 +33,39 @@ public class MainActivity extends AppCompatActivity implements AddSchoolDialog.A
 
     //Array to store all schools
     private List <School> schools = new ArrayList<>();
-    private SchoolAdapter adapt = new SchoolAdapter(schools);
 
     // Firebase Firestore database
     private FirebaseFirestore db;
     private CollectionReference schoolColection;
     private DocumentReference userDoc;
 
-
+    // View holders
+    private RecyclerView resView;
+    private RecyclerView.Adapter adapt;
+    private RecyclerView.LayoutManager resViewLayMan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RecyclerView resView = findViewById(R.id.mainResView);
+
+        // Initialize RecyclerView
+        resView = findViewById(R.id.mainResView);
+        resView.setHasFixedSize(true);
 
         // Use a linear layout manager for the RecyclerView
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        resView.setLayoutManager(layoutManager);
-        resView.setAdapter(adapt);
+        resViewLayMan = new LinearLayoutManager(this);
+        resView.setLayoutManager(resViewLayMan);
 
+        // Get shared preferences
         SharedPreferences pref = getApplicationContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
         email = pref.getString("Email", "null");
         userName = pref.getString("User", "null");
         //System.out.println(email);
+
+        // Set View Adapter
+        adapt = new SchoolAdapter(schools, this, userName);
+        resView.setAdapter(adapt);
 
         // Get the Firestore database
         db = FirebaseFirestore.getInstance();
@@ -108,6 +117,4 @@ public class MainActivity extends AppCompatActivity implements AddSchoolDialog.A
             }
         });
     }
-
-
 }
