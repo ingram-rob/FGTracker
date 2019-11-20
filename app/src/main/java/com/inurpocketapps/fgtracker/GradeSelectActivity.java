@@ -1,16 +1,19 @@
 package com.inurpocketapps.fgtracker;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -37,7 +40,7 @@ public class GradeSelectActivity extends AppCompatActivity implements AddGradeDi
 
     // FireBase FireStore database
     private FirebaseFirestore db;
-    private CollectionReference schoolColection;
+    private CollectionReference schoolCollection;
     private DocumentReference userDoc;
     private DocumentReference schoolDoc;
 
@@ -53,7 +56,6 @@ public class GradeSelectActivity extends AppCompatActivity implements AddGradeDi
         Bundle extras = getIntent().getExtras();
         schoolName = extras.getString("SCHOOL_NAME");
         userName = extras.getString("USER_NAME");
-        System.out.println(userName);
 
         // Initialize RecyclerView
         resView = findViewById(R.id.gradeResView);
@@ -66,9 +68,10 @@ public class GradeSelectActivity extends AppCompatActivity implements AddGradeDi
         // Get the FireStore database
         db = FirebaseFirestore.getInstance();
         userDoc = db.collection(USER_COL).document(userName);
-        schoolColection = userDoc.collection(SCHOOL_COL);
-        schoolDoc = schoolColection.document(schoolName);
-        getSchool(schoolName);
+        schoolCollection = userDoc.collection(SCHOOL_COL);
+        schoolDoc = schoolCollection.document(schoolName);
+        Log.i("FIREBASE", "Loaded schoolDoc");
+        getSchool();
 
         // Populate the list of grades
         initializeGradeList();
@@ -85,26 +88,43 @@ public class GradeSelectActivity extends AppCompatActivity implements AddGradeDi
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //todo: add code for grade adder popup
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
-    private void getSchool(String skl) {
-        DocumentReference schoolDoc = schoolColection.document(skl);
-        schoolDoc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+    private void getSchool() {
+        //DocumentReference schoolDoc = schoolCollection.document(skl);
+//        schoolDoc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                School sk = documentSnapshot.toObject(School.class);
+//                school = sk;
+//            }
+//        });
+        schoolDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(DocumentSnapshot doc) {
-                School sk = doc.toObject(School.class);
-                school = sk;
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                Log.e("GET_SCHOOL", "onComplete is Called");
+                if (task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    School sk = doc.toObject(School.class);
+                    school = sk;
+                }
             }
         });
+        schoolDoc.get().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("GET_SCHOOL", "Failed Hard");
+            }
+        });
+
     }
 
     private void initializeGradeList() {
+        Log.i("GRADE_LIST", "Starting to Initialize Grade List");
         grades = school.getGrades();
     }
 
