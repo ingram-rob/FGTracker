@@ -7,6 +7,8 @@ public class Grade {
     private int gradeNumber;
     private List<Classroom> classrooms;
 
+    Grade(){ this.classrooms = new ArrayList<>(); }
+
     Grade(int gradeNumber) {
         this.gradeNumber = gradeNumber;
         this.classrooms = new ArrayList<Classroom>();

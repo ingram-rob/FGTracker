@@ -30,11 +30,6 @@ public class GradeAdapter extends RecyclerView.Adapter <GradeAdapter.GradeViewHo
 
     @Override
     public GradeViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
-        /*// create a new view
-        TextView v = new TextView(parent.getContext());
-        v.setHeight(150);
-        v.setTextSize(25);
-        v.setPadding(50, 25, 0, 0);*/
         View grades = LayoutInflater.from(parent.getContext()).inflate(R.layout.grade_list_item, parent, false);
         GradeViewHolder vh = new GradeViewHolder(grades);
         return vh;
