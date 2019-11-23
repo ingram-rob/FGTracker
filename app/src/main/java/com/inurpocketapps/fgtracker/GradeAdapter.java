@@ -42,7 +42,8 @@ public class GradeAdapter extends RecyclerView.Adapter <GradeAdapter.GradeViewHo
 
     @Override
     public void onBindViewHolder(GradeViewHolder holder, final int position) {
-        holder.text.setText("Grade " + dataSet.get(position).getGradeNumber());
+        String gradeNumber = "Grade " + dataSet.get(position).getGradeNumber();
+        holder.text.setText(gradeNumber);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

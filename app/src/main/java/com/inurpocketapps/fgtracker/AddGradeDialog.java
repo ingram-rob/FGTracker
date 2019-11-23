@@ -13,20 +13,21 @@ import androidx.fragment.app.DialogFragment;
 
 public class AddGradeDialog extends DialogFragment {
 
-    private View vw;
+    private View grdView;
+    private NumberPicker num;
 
     public interface AddGradeListener {
         void onDialogPositiveClick (int grade);
     }
 
-    AddGradeListener gradeLisener;
+    AddGradeListener gradeListener;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
         try {
-            gradeLisener = (AddGradeDialog.AddGradeListener) context;
+            gradeListener = (AddGradeListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString() + " must implement AddGradeListener");
         }
@@ -39,20 +40,20 @@ public class AddGradeDialog extends DialogFragment {
 
         // Inflate custom layout
         LayoutInflater gDialogInflator = requireActivity().getLayoutInflater();
-        vw = gDialogInflator.inflate(R.layout.school_input_dialog,null);
+        grdView = gDialogInflator.inflate(R.layout.grade_input_dialog,null);
 
         // Build dialog
         AlertDialog.Builder gDialogBuilder = new AlertDialog.Builder(getActivity());
-        gDialogBuilder.setView(vw);
+        gDialogBuilder.setView(grdView);
         gDialogBuilder.setTitle(R.string.add_grade_title);
-        final NumberPicker num = getDialog().findViewById(R.id.gradePicker);
+        num = grdView.findViewById(R.id.gradePicker);
         num.setMaxValue(12);
         num.setMinValue(1);
         gDialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int grade = num.getValue();
-                gradeLisener.onDialogPositiveClick(grade);
+                gradeListener.onDialogPositiveClick(grade);
             }
         });
         gDialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

@@ -16,7 +16,7 @@ public class AddSchoolDialog extends DialogFragment {
     private View sView;
 
     public interface AddStudentListener {
-        public void onDialogPositiveClick(String schoolName);
+        void onDialogPositiveClick(String schoolName);
     }
 
     AddStudentListener imListening;
