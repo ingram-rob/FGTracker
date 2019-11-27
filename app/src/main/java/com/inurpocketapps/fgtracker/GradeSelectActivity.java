@@ -11,11 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +44,7 @@ public class GradeSelectActivity extends AppCompatActivity implements AddGradeDi
     private CollectionReference schoolCollection;
     private DocumentReference userDoc;
     private DocumentReference schoolDoc;
+    private CollectionReference gradeCollection;
 
     // View holders
     private RecyclerView resView;
@@ -68,6 +72,7 @@ public class GradeSelectActivity extends AppCompatActivity implements AddGradeDi
         userDoc = db.collection(USER_COL).document(userName);
         schoolCollection = userDoc.collection(SCHOOL_COL);
         schoolDoc = schoolCollection.document(schoolName);
+        gradeCollection = schoolDoc.collection("Grades");
         Log.i("FIREBASE", "Loaded schoolDoc");
         getSchool();
 
@@ -111,10 +116,24 @@ public class GradeSelectActivity extends AppCompatActivity implements AddGradeDi
 
     private void initializeGradeList() {
         Log.i("GRADE_LIST", "Starting to Initialize Grade List");
-        if (school.getGrades() != null)
+        /*if (school.getGrades() != null)
         {
             school.getGrades();
-        }
+        }*/
+        gradeCollection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        grades.add(document.toObject(Grade.class));
+                    }
+                    adapt.notifyDataSetChanged();
+                }
+                else {
+                    Log.e("FIREBASE","Failed to get Grades from collection");
+                }
+            }
+        });
     }
 
     // On Click Method for the add button
@@ -127,7 +146,21 @@ public class GradeSelectActivity extends AppCompatActivity implements AddGradeDi
     @Override
     public void onDialogPositiveClick(int grade) {
         Grade g = new Grade(grade);
+        //schoolDoc.update("grades", grades);
         grades.add(g);
-        schoolDoc.update("grades", grades);
+        adapt.notifyDataSetChanged();
+        DocumentReference newGrade = gradeCollection.document("Grade " + grade);
+        newGrade.set(g).addOnSuccessListener(new OnSuccessListener <Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.e("FIREBASE", "Successfully added new grade");
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("FIREBASE", "Failed to add new grade", e);
+            }
+        });
     }
 }

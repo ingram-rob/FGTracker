@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements AddSchoolDialog.A
     @Override
     public void onDialogPositiveClick(String schoolName) {
         School s = new School(schoolName);
-        schools.add(s);
+        //schools.add(s);
         schoolColection.document(s.getName()).set(s);
     }
 

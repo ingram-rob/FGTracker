@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class GradeAdapter extends RecyclerView.Adapter <GradeAdapter.GradeViewHo
         public TextView text;
         public GradeViewHolder(View txt){
             super(txt);
-            text = txt.findViewById(R.id.schoolName);
+            text = txt.findViewById(R.id.gradeName);
         }
     }
 
@@ -36,7 +37,7 @@ public class GradeAdapter extends RecyclerView.Adapter <GradeAdapter.GradeViewHo
     }
 
     @Override
-    public void onBindViewHolder(GradeViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull GradeViewHolder holder, final int position) {
         String gradeNumber = "Grade " + dataSet.get(position).getGradeNumber();
         holder.text.setText(gradeNumber);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
