@@ -7,6 +7,10 @@ public class Classroom {
     private String name;
     private List<Student> students;
 
+    Classroom(){
+        this.students = new ArrayList<>();
+    }
+
     Classroom(String name) {
         this.name = name;
         this.students = new ArrayList<Student>();

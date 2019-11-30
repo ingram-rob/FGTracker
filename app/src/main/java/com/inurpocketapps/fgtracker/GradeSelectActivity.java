@@ -77,7 +77,7 @@ public class GradeSelectActivity extends AppCompatActivity implements AddGradeDi
         getSchool();
 
         // Set View Adapter
-        adapt = new GradeAdapter(grades, this);
+        adapt = new GradeAdapter(grades, this, extras);
         resView.setAdapter(adapt);
 
         // Toolbar properties
