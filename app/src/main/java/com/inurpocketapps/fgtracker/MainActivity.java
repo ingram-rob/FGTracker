@@ -110,8 +110,6 @@ public class MainActivity extends AppCompatActivity implements
         schoolColection.document(s.getName()).set(s);
     }
 
-
-
     private void initializeSchoolList() {
         schoolColection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
