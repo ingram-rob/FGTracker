@@ -21,7 +21,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AddSchoolDialog.AddStudentListener {
+public class MainActivity extends AppCompatActivity implements
+        AddSchoolDialog.AddStudentListener, AddUserDialog.AddUserListener {
 
     // Static Variables
     private static final String USER_COL = "USERS";
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements AddSchoolDialog.A
     // Persistant variables
     private String email;
     private String userName;
+    private boolean firstTimeUser;
 
     //Array to store all schools
     private List <School> schools = new ArrayList<>();
@@ -61,7 +63,10 @@ public class MainActivity extends AppCompatActivity implements AddSchoolDialog.A
         SharedPreferences pref = getApplicationContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
         email = pref.getString("Email", "null");
         userName = pref.getString("User", "null");
+        firstTimeUser = pref.getBoolean("FirstTime", true);
         //System.out.println(email);
+
+        firstTimeUser();
 
         // Set View Adapter
         adapt = new SchoolAdapter(schools, this, userName);
@@ -80,28 +85,32 @@ public class MainActivity extends AppCompatActivity implements AddSchoolDialog.A
     @Override
     protected void onStop () {
         super.onStop();
-        String email = "blabla@yahoo.com";
-        String userName = "testUser";
+        //String email = "blabla@yahoo.com";
+        //String userName = "testUser";
         SharedPreferences pref = getApplicationContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = pref.edit();
         edit.putString("Email", email);
         edit.putString("User", userName);
+        edit.putBoolean("FirstTime", firstTimeUser);
         edit.apply();
     }
 
-    //onClick method to add a new school.
+    // onClick method to add a new school.
     public void addSchool (View view){
         // Create Alert Dialog for School Name input
         AddSchoolDialog addStu = new AddSchoolDialog();
         addStu.show(getSupportFragmentManager(), "newSchool");
     }
 
+    // Add school dialog positive button click event.
     @Override
     public void onDialogPositiveClick(String schoolName) {
         School s = new School(schoolName);
-        //schools.add(s);
+        schools.add(s);
         schoolColection.document(s.getName()).set(s);
     }
+
+
 
     private void initializeSchoolList() {
         schoolColection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -116,5 +125,21 @@ public class MainActivity extends AppCompatActivity implements AddSchoolDialog.A
                 }
             }
         });
+    }
+
+    private void firstTimeUser() {
+        if (firstTimeUser) {
+            // Create Add User Dialog
+            AddUserDialog addUser = new AddUserDialog();
+            addUser.show(getSupportFragmentManager(), "newUser");
+        }
+    }
+
+    // Add user Dialog positive button click event
+    @Override
+    public void onDialogPositiveClick(String user, String newEmail) {
+        userName = user;
+        email = newEmail;
+        firstTimeUser = false;
     }
 }
