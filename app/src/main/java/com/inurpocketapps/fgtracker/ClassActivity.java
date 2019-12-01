@@ -76,7 +76,7 @@ public class ClassActivity extends AppCompatActivity implements AddClassDialog.A
         resView.setLayoutManager(resViewLayMan);
 
         // Set View Adapter
-        adapt = new ClassroomAdapter(classrooms);
+        adapt = new ClassroomAdapter(classrooms, this, extras);
         resView.setAdapter(adapt);
 
         //Get Database
