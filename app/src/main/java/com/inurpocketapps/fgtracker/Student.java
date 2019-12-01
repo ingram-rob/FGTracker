@@ -8,24 +8,25 @@ public class Student {
     private String last;
     private String id;
     private String birthDate;
-    private List<FitnessTest> testList;
+    //private List<FitnessTest> testList;
     private int age;
     private int weight;
     private int heightFeet;
     private int heightInches;
 
     //Default constructor
-    //all it needs to do for now is initialize testList
-    public Student(String first, String middle, String last, String birthDate) {
+    public Student() {
+        //testList = new ArrayList<>();
+    }
+
+    public Student(String first, String middle, String last) {
         this.first = first;
         this.middle = middle;
         this.last = last;
-        this.id = id;
-        this.birthDate = birthDate;
-        testList = new ArrayList<FitnessTest>();
+        //testList = new ArrayList<FitnessTest>();
     }
 
-    public List<FitnessTest> getTestList() {
+    /*public List<FitnessTest> getTestList() {
         return testList;
     }
 
@@ -39,57 +40,43 @@ public class Student {
 
     public FitnessTest getTest(int i) {
         return testList.get(i);
-    }
+    }*/
 
-    public String getName () {
-        return first + " " + middle + " " + last;
-    }
+    public String getName () { return first + " " + middle + " " + last; }
 
-    public String getBirthDate() {
-        return birthDate;
-    }
+    public String getFirst () { return first; }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
+    public String getMiddle () { return middle; }
 
-    public int getHeightFeet() {
-        return heightFeet;
-    }
+    public String getLast () { return last; }
 
-    public int getHeightInches() {
-        return heightInches;
-    }
+    public String getBirthDate() { return birthDate; }
 
-    public int getWeight() {
-        return weight;
-    }
+    public int getHeightFeet() { return heightFeet; }
 
-    public String getId(){
-        return id;
-    }
+    public int getHeightInches() { return heightInches; }
 
-    public int getAge() {
-        return age;
-    }
+    public int getWeight() { return weight; }
 
-    public void setHeightFeet(int heightFeet) {
-        this.heightFeet = heightFeet;
-    }
+    public String getId(){ return id; }
 
-    public void setHeightInches(int heightInches) {
-        this.heightInches = heightInches;
-    }
+    public int getAge() { return age; }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
+    public void setFirst (String first) { this.first = first; }
 
-    public void setAge (int age) {
-        this.age = age;
-    }
+    public void setMiddle (String middle) { this.middle = middle; }
 
-    public void setId (String id) {
-        this.id = id;
-    }
+    public void setLast (String last) { this.last = last; }
+
+    public void setBirthDate(String birthDate) { this.birthDate = birthDate; }
+
+    public void setHeightFeet(int heightFeet) { this.heightFeet = heightFeet; }
+
+    public void setHeightInches(int heightInches) { this.heightInches = heightInches; }
+
+    public void setWeight(int weight) { this.weight = weight; }
+
+    public void setAge (int age) { this.age = age; }
+
+    public void setId (String id) { this.id = id; }
 }

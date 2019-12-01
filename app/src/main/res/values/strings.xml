@@ -13,5 +13,9 @@
     <string name="userPrompt">User Name</string>
     <string name="userEmail">Email</string>
     <string name="title_activity_student_select">Students</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_middle_name">Middle Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_classroom_name">Classroom Name</string>
 
 </resources>

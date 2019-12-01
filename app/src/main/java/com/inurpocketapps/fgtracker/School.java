@@ -11,15 +11,11 @@ import java.util.List;
 public class School {
 
     private String name;
-    private List<Grade> grades;
 
-    School (){
-        this.grades = new ArrayList<>();
-    }
+    School (){ }
 
     School (String name){
         this.name = name;
-        this.grades = new ArrayList<>();
     }
 
     /**
@@ -29,22 +25,6 @@ public class School {
      */
     public Grade getGrade(int num) {
         return null;
-    }
-
-    /**
-     * returns the grades list stored in thet school
-     * @return List<Grade>
-     */
-    public List<Grade> getGrades() {
-        return grades;
-    }
-
-    /**
-     * Adds a new grade
-     * @param num grade to add
-     */
-    public void addGrade(int num) {
-        grades.add(new Grade(num));
     }
 
     /**

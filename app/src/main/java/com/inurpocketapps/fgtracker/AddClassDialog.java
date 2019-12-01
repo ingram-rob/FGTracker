@@ -39,7 +39,7 @@ public class AddClassDialog extends DialogFragment {
         LayoutInflater layoutInflater = requireActivity().getLayoutInflater();
         classView = layoutInflater.inflate(R.layout.class_input_dialog, null);
 
-        cBuilderDialog.setTitle("Input classroom name");
+        cBuilderDialog.setTitle("Input Classroom Name");
         cBuilderDialog.setView(classView)
             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
