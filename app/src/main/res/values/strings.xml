@@ -12,5 +12,6 @@
     <string name="title_activity_grade_select">GradeSelectActivity</string>
     <string name="userPrompt">User Name</string>
     <string name="userEmail">Email</string>
+    <string name="title_activity_student_select">Students</string>
 
 </resources>
