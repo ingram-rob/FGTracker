@@ -145,21 +145,33 @@ public class GradeSelectActivity extends AppCompatActivity implements AddGradeDi
 
     @Override
     public void onDialogPositiveClick(int grade) {
-        Grade g = new Grade(grade);
+        final Grade g = new Grade(grade);
         //schoolDoc.update("grades", grades);
-        grades.add(g);
         adapt.notifyDataSetChanged();
-        DocumentReference newGrade = gradeCollection.document("Grade " + grade);
-        newGrade.set(g).addOnSuccessListener(new OnSuccessListener <Void>() {
+        final DocumentReference newGrade = gradeCollection.document("Grade " + grade);
+        newGrade.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(Void aVoid) {
-                Log.e("FIREBASE", "Successfully added new grade");
-            }
-        })
-        .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e("FIREBASE", "Failed to add new grade", e);
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()) { Log.d("FIREBASE","Grade already exists"); }
+                    else {
+                        newGrade.set(g).addOnSuccessListener(new OnSuccessListener <Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.e("FIREBASE", "Successfully added new grade");
+                                grades.add(g);
+                            }
+                        })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.e("FIREBASE", "Failed to add new grade", e);
+                                    }
+                                });
+                    }
+                }
+                else { Log.d("FIREBASE","get failed"); }
             }
         });
     }
