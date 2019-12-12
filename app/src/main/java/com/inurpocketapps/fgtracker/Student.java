@@ -11,7 +11,7 @@ public class Student {
     //private List<FitnessTest> testList;
     private int age;
     private int weight;
-    private int heightFeet;
+    private float heightFeet;
     private int heightInches;
 
     //Default constructor
@@ -52,7 +52,7 @@ public class Student {
 
     public String getBirthDate() { return birthDate; }
 
-    public int getHeightFeet() { return heightFeet; }
+    public float getHeightFeet() { return heightFeet; }
 
     public int getHeightInches() { return heightInches; }
 
@@ -70,7 +70,7 @@ public class Student {
 
     public void setBirthDate(String birthDate) { this.birthDate = birthDate; }
 
-    public void setHeightFeet(int heightFeet) { this.heightFeet = heightFeet; }
+    public void setHeightFeet(float heightFeet) { this.heightFeet = heightFeet; }
 
     public void setHeightInches(int heightInches) { this.heightInches = heightInches; }
 

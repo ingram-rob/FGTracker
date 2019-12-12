@@ -17,5 +17,20 @@
     <string name="hint_middle_name">Middle Name</string>
     <string name="hint_last_name">Last Name</string>
     <string name="hint_classroom_name">Classroom Name</string>
+    <string name="title_activity_student_info">StudentInfo</string>
+    <string name="abdominal_text">Abdominal</string>
+    <string name="aerobic_text">Aerobic</string>
+    <string name="body_comp_text">Body Comp</string>
+    <string name="flexibility_text">Flexibility</string>
+    <string name="upper_body_text">Upper Body</string>
+    <string name="trunk_text">Trunk</string>
+    <string name="student_name_text">Name</string>
+    <string name="student_id_text">ID</string>
+    <string name="student_age_text">Age</string>
+    <string name="student_birthdate_text">Birth Date</string>
+    <string name="student_heightinches_text">Height (Inches)</string>
+    <string name="student_heightfeet_text">Height (Feet)</string>
+    <string name="student_weight_text">Weight</string>
+    <string name="fitnesstest_text">Fitness Tests</string>
 
 </resources>
