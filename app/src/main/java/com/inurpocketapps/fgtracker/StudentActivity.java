@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -112,21 +113,33 @@ public class StudentActivity extends AppCompatActivity implements AddStudentDial
 
     @Override
     public void onDialogPositiveClick (String first, String middle, String last) {
-        Student s = new Student(first, middle, last);
-        students.add(s);
-        adapt.notifyDataSetChanged();
-        DocumentReference newStudent = studentCollection.document(first + " " + middle + " " + last);
-        newStudent.set(s).addOnSuccessListener(new OnSuccessListener<Void>() {
+        final Student s = new Student(first, middle, last);
+        final DocumentReference newStudent = studentCollection.document(first + " " + middle + " " + last);
+        newStudent.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(Void aVoid) {
-                Log.e("FIREBASE", "Successfully added new student");
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("FIREBASE", "Failed to add new student", e);
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()) { Log.d("FIREBASE","student already exists"); }
+                    else {
+                        newStudent.set(s).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d("FIREBASE","successfully added new student");
+                                students.add(s);
+                                adapt.notifyDataSetChanged();
+                            }
+                        })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d("FIREBASE","failed to add new student");
+                                    }
+                                });
                     }
-                });
+                }
+                else { Log.d("FIREBASE","get failed"); }
+            }
+        });
     }
 }
