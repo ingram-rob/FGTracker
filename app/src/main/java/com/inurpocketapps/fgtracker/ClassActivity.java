@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -121,11 +122,35 @@ public class ClassActivity extends AppCompatActivity implements AddClassDialog.A
     //Add new classroom on add dialog positive click
     @Override
     public void onDialogPositiveClick (String text) {
-        Classroom g = new Classroom(text);
-        classrooms.add(g);
-        adapt.notifyDataSetChanged();
-        DocumentReference newClassroom = classroomCollection.document(text);
-        newClassroom.set(g).addOnSuccessListener(new OnSuccessListener<Void>() {
+        final Classroom g = new Classroom(text);
+        final DocumentReference newClassroom = classroomCollection.document(text);
+        newClassroom.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()) { Log.d("FIREBASE","classroom already exists"); }
+                    else {
+                        newClassroom.set(g).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d("FIREBASE","successfully added new classroom");
+                                classrooms.add(g);
+                                adapt.notifyDataSetChanged();
+                            }
+                        })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d("FIREBASE","failed to add new classroom");
+                                    }
+                                });
+                    }
+                }
+                else { Log.d("FIREBASE","get failed"); }
+            }
+        });
+        /*newClassroom.set(g).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.e("FIREBASE", "Successfully added new classroom");
@@ -136,6 +161,6 @@ public class ClassActivity extends AppCompatActivity implements AddClassDialog.A
                     public void onFailure(@NonNull Exception e) {
                         Log.e("FIREBASE", "Failed to add new classroom", e);
                     }
-                });
+                });*/
     }
 }
