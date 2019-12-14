@@ -10,6 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".FlexActivity"
+            android:label="@string/title_activity_flex"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".StudentInfo"
+            android:label="@string/title_activity_student_info"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".GradeSelectActivity"
             android:label="@string/title_activity_grade_select"
             android:parentActivityName=".MainActivity"

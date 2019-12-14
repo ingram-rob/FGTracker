@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/testDate"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="Date:" />
+        <TextView
+            android:id="@+id/resultDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_marginStart="20dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sitTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sit_reach_text"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp">
+        <TextView
+            android:id="@+id/sitLeft"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="Left:" />
+        <TextView
+            android:id="@+id/sitLeftResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_marginStart="20dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp">
+        <TextView
+            android:id="@+id/sitRight"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="Right:" />
+        <TextView
+            android:id="@+id/sitRightResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_marginStart="20dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/shoulderTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/shoulder_text"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp">
+        <TextView
+            android:id="@+id/testLeft"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="Left:" />
+        <TextView
+            android:id="@+id/resultLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_marginStart="20dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp">
+        <TextView
+            android:id="@+id/testRight"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="Right:" />
+        <TextView
+            android:id="@+id/resultRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_marginStart="20dp"/>
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

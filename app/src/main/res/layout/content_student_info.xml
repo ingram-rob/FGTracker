@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ContraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="3"
+    android:rowCount="10"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".StudentInfo"
+    tools:showIn="@layout/activity_student_info">
+
+    <TextView
+        android:id="@+id/weightVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeWeight"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heightfeetVal" />
+
+    <TextView
+        android:id="@+id/ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:onClick="changeId"
+        android:text="@string/student_id_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/age"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <TextView
+        android:id="@+id/age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeAge"
+        android:text="@string/student_age_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/birthdate"
+        app:layout_constraintStart_toStartOf="@+id/ID"
+        app:layout_constraintTop_toBottomOf="@+id/ID" />
+
+    <TextView
+        android:id="@+id/birthdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:onClick="changeBirthDate"
+        android:text="@string/student_birthdate_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/heightinches"
+        app:layout_constraintStart_toStartOf="@+id/age"
+        app:layout_constraintTop_toBottomOf="@+id/age" />
+
+    <TextView
+        android:id="@+id/heightinches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeHeightInches"
+        android:text="@string/student_heightinches_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/heightfeet"
+        app:layout_constraintStart_toStartOf="@+id/birthdate"
+        app:layout_constraintTop_toBottomOf="@+id/birthdate" />
+
+    <TextView
+        android:id="@+id/heightfeet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeHeightFeet"
+        android:text="@string/student_heightfeet_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/weight"
+        app:layout_constraintStart_toStartOf="@+id/heightinches"
+        app:layout_constraintTop_toBottomOf="@+id/heightinches" />
+
+    <TextView
+        android:id="@+id/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeWeight"
+        android:text="@string/student_weight_text"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/heightfeet"
+        app:layout_constraintTop_toBottomOf="@+id/heightfeet" />
+
+    <TextView
+        android:id="@+id/fitnesstests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="300dp"
+        android:text="@string/fitnesstest_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeName"
+        android:text="@string/student_name_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/ID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nameVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeName"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/idVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeId"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameVal" />
+
+    <TextView
+        android:id="@+id/ageVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeAge"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idVal" />
+
+    <TextView
+        android:id="@+id/birthdateVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeBirthDate"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ageVal" />
+
+    <TextView
+        android:id="@+id/heightfeetVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeHeightFeet"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heightinchesVal" />
+
+    <TextView
+        android:id="@+id/heightinchesVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeHeightInches"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birthdateVal" />
+
+    <include
+        layout="@layout/test_grid_layout"
+        android:layout_width="412dp"
+        android:layout_height="302dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fitnesstests" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

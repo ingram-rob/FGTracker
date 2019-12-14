@@ -47,7 +47,13 @@ public class StudentAdapter extends RecyclerView.Adapter <StudentAdapter.Student
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, StudentInfo.class);
+                intent.putExtra("STUDENT_NAME", studentName);
+                intent.putExtra("CLASS_NAME", extras.getString("CLASS_NAME"));
+                intent.putExtra("GRADE_NUMBER", extras.getInt("GRADE_NUMBER"));
+                intent.putExtra("SCHOOL_NAME", extras.getString("SCHOOL_NAME"));
+                intent.putExtra("USER_NAME", extras.getString("USER_NAME"));
+                context.startActivity(intent);
             }
         });
     }
