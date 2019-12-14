@@ -3,6 +3,7 @@ package com.inurpocketapps.fgtracker;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -105,9 +108,34 @@ public class MainActivity extends AppCompatActivity implements
     // Add school dialog positive button click event.
     @Override
     public void onDialogPositiveClick(String schoolName) {
-        School s = new School(schoolName);
-        schools.add(s);
-        schoolColection.document(s.getName()).set(s);
+        final School s = new School(schoolName);
+        final DocumentReference newSchool = schoolColection.document(s.getName());
+        newSchool.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()) { Log.d("FIREBASE","school already exists"); }
+                    else {
+                        newSchool.set(s).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d("FIREBASE","successfully added new school");
+                                schools.add(s);
+                                adapt.notifyDataSetChanged();
+                            }
+                        })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d("FIREBASE","failed to add new school");
+                                    }
+                                });
+                    }
+                }
+                else { Log.d("FIREBASE","get failed"); }
+            }
+        });
     }
 
     private void initializeSchoolList() {

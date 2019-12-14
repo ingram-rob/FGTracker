@@ -161,6 +161,7 @@ public class GradeSelectActivity extends AppCompatActivity implements AddGradeDi
                             public void onSuccess(Void aVoid) {
                                 Log.e("FIREBASE", "Successfully added new grade");
                                 grades.add(g);
+                                adapt.notifyDataSetChanged();
                             }
                         })
                                 .addOnFailureListener(new OnFailureListener() {
