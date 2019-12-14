@@ -32,5 +32,9 @@
     <string name="student_heightfeet_text">Height (Feet)</string>
     <string name="student_weight_text">Weight</string>
     <string name="fitnesstest_text">Fitness Tests</string>
+    <string name="title_activity_flex">Flexibility Test</string>
+    <string name="sit_reach_text">Sit &amp; Reach</string>
+    <string name="shoulder_text">Shoulder Reach</string>
+
 
 </resources>

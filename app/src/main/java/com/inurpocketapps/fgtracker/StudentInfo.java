@@ -1,6 +1,14 @@
 package com.inurpocketapps.fgtracker;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -10,14 +18,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 public class StudentInfo extends AppCompatActivity implements AddStudentDialog.AddStudentListener, InputIdDialog.InputIdListener,
     InputNumberDialog.InputNumberListener, InputDateDialog.InputDateListener {
@@ -295,6 +295,10 @@ public class StudentInfo extends AppCompatActivity implements AddStudentDialog.A
                 Log.e("FIREBASE", "Failed to change birthdate in document");
             }
         });
+    }
+
+    public void goToStretchTest(){
+        Intent stretch = new Intent(this, FlexActivity.class);
     }
 }
 
