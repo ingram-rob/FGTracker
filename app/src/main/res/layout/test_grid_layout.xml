@@ -14,6 +14,7 @@
         android:layout_width="120dp"
         android:layout_height="140dp"
         android:layout_marginStart="24dp"
+        android:onClick="startAbdominalActivity"
         android:text="@string/abdominal_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,6 +23,7 @@
         android:id="@+id/aerobic"
         android:layout_width="120dp"
         android:layout_height="140dp"
+        android:onClick="startAerobicActivity"
         android:text="@string/aerobic_text"
         app:layout_constraintEnd_toEndOf="@+id/body_comp"
         app:layout_constraintHorizontal_bias="0.55"
@@ -33,6 +35,7 @@
         android:layout_width="120dp"
         android:layout_height="140dp"
         android:layout_marginEnd="24dp"
+        android:onClick="startBodyCompActivity"
         android:text="@string/body_comp_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,6 +45,7 @@
         android:layout_width="120dp"
         android:layout_height="140dp"
         android:layout_marginStart="24dp"
+        android:onClick="startFlexibilityActivity"
         android:text="@string/flexibility_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -50,6 +54,7 @@
         android:id="@+id/trunk"
         android:layout_width="120dp"
         android:layout_height="140dp"
+        android:onClick="startTrunkActivity"
         android:text="@string/trunk_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,6 +65,7 @@
         android:layout_width="120dp"
         android:layout_height="140dp"
         android:layout_marginEnd="24dp"
+        android:onClick="startUpperBodyActivity"
         android:text="@string/upper_body_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

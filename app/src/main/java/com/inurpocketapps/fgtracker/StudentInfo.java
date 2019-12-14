@@ -153,6 +153,30 @@ public class StudentInfo extends AppCompatActivity implements AddStudentDialog.A
         dialog.show(getSupportFragmentManager(), "Change Birth Date");
     }
 
+    public void startAbdominalActivity (View v) {
+
+    }
+
+    public void startAerobicActivity (View v) {
+
+    }
+
+    public void startBodyCompActivity (View v) {
+
+    }
+
+    public void startFlexibilityActivity (View v) {
+
+    }
+
+    public void startTrunkActivity (View v) {
+
+    }
+
+    public void startUpperBodyActivity (View v) {
+
+    }
+
     //AddStudentDialog overload
     @Override
     public void onDialogPositiveClick (final String first, final String middle, final String last) {
