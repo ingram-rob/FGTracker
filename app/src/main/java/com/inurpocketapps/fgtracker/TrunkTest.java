@@ -1,18 +1,18 @@
 package com.inurpocketapps.fgtracker;
 
 public class TrunkTest extends FitnessTest {
-    int trunkLift;
+    String trunkLift;
 
     public TrunkTest() {
         date = getCurrentDate();
-        trunkLift = 0;
+        trunkLift = "0";
     }
 
-    public void setTrunkLift(int trunkLift) {
+    public void setTrunkLift(String trunkLift) {
         this.trunkLift = trunkLift;
     }
 
-    public int getTrunkLift() {
+    public String getTrunkLift() {
         return trunkLift;
     }
 }

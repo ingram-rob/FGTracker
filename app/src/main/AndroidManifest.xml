@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".TrunkActivity"
+            android:label="@string/title_activity_trunk"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".AerobicActivity"
             android:label="@string/title_activity_aerobic"
             android:theme="@style/AppTheme.NoActionBar"></activity>

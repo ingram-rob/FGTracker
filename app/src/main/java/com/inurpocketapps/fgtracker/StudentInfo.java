@@ -186,7 +186,15 @@ public class StudentInfo extends AppCompatActivity implements AddStudentDialog.A
     }
 
     public void startTrunkActivity (View v) {
-
+        Intent trunk = new Intent(this, TrunkActivity.class);
+        Bundle extras = new Bundle();
+        extras.putString("SCHOOL_NAME", schoolName);
+        extras.putString("USER_NAME", userName);
+        extras.putInt("GRADE_NUMBER", gradeNumber);
+        extras.putString("CLASS_NAME", classroomName);
+        extras.putString("STUDENT_NAME", studentName);
+        trunk.putExtras(extras);
+        this.startActivity(trunk);
     }
 
     public void startUpperBodyActivity (View v) {
