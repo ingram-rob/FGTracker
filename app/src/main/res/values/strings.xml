@@ -35,6 +35,10 @@
     <string name="title_activity_flex">Flexibility Test</string>
     <string name="sit_reach_text">Sit &amp; Reach</string>
     <string name="shoulder_text">Shoulder Reach</string>
+    <string name="title_activity_abdominal_tests">Abdominal</string>
+    <string name="title_activity_aerobic_tests">Aerobic</string>
+    <string name="title_activity_abdominal">AbdominalActivity</string>
+    <string name="title_activity_aerobic">AerobicActivity</string>
 
 
 </resources>

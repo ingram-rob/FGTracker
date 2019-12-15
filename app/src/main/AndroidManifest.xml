@@ -10,9 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".AerobicActivity"
+            android:label="@string/title_activity_aerobic"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".AbdominalActivity"
+            android:label="@string/title_activity_abdominal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".FlexActivity"
             android:label="@string/title_activity_flex"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".StudentInfo"
             android:label="@string/title_activity_student_info"
