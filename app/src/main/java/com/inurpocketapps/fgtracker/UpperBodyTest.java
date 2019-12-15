@@ -1,38 +1,38 @@
 package com.inurpocketapps.fgtracker;
 
 public class UpperBodyTest extends FitnessTest {
-    int pullUps;
-    int pushUps;
-    int armHang;
+    String pullUps;
+    String pushUps;
+    String armHang;
 
     public UpperBodyTest() {
         date = getCurrentDate();
-        pullUps = 0;
-        pushUps = 0;
-        armHang = 0;
+        pullUps = "0";
+        pushUps = "0";
+        armHang = "0";
     }
 
-    public void setArmHang(int armHang) {
+    public void setArmHang(String armHang) {
         this.armHang = armHang;
     }
 
-    public void setPullUps(int pullUps) {
+    public void setPullUps(String pullUps) {
         this.pullUps = pullUps;
     }
 
-    public void setPushUps(int pushUps) {
+    public void setPushUps(String pushUps) {
         this.pushUps = pushUps;
     }
 
-    public int getArmHang() {
+    public String getArmHang() {
         return armHang;
     }
 
-    public int getPullUps() {
+    public String getPullUps() {
         return pullUps;
     }
 
-    public int getPushUps() {
+    public String getPushUps() {
         return pushUps;
     }
 }

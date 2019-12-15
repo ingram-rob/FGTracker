@@ -20,7 +20,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrunkActivity extends AppCompatActivity implements AddTrunkDialog.addTrunkTestListener {
+public class UpperBodyActivity extends AppCompatActivity implements AddUpperDialog.addUpperTestListener {
 
     // Static Variables
     private static final String CLASS_COL = "CLASSES";
@@ -28,8 +28,8 @@ public class TrunkActivity extends AppCompatActivity implements AddTrunkDialog.a
     private static final String GRADE_COL = "Grades";
     private static final String STUDENT_COL = "STUDENTS";
     private static final String TEST_COL = "TESTS";
-    private static final String TEST_NAME = "TRUNK_TEST";
-    private static final String TRUNK_COL = "TRUNK_RESULTS";
+    private static final String TEST_NAME = "UPPER_TEST";
+    private static final String UPPER_COL = "UPPER_RESULTS";
 
     // Persistant variables
     private String email;
@@ -47,10 +47,10 @@ public class TrunkActivity extends AppCompatActivity implements AddTrunkDialog.a
     private CollectionReference classroomCollection;
     private CollectionReference studentCollection;
     private CollectionReference testCollection;
-    private CollectionReference trunkTestCollection;
+    private CollectionReference upperTestCol;
 
-    // Array to store all trunk lift tests
-    private List<TrunkTest> trunkTests = new ArrayList<>();
+    // Array to store all flexibility tests
+    private List<UpperBodyTest> upperTests = new ArrayList<>();
 
     // View Holders
     private RecyclerView resView;
@@ -60,10 +60,10 @@ public class TrunkActivity extends AppCompatActivity implements AddTrunkDialog.a
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trunk);
+        setContentView(R.layout.activity_upper_body);
 
         // Initialize RecyclerView
-        resView = findViewById(R.id.trunkResView);
+        resView = findViewById(R.id.upperResView);
         resView.setHasFixedSize(true);
 
         // Use a linear layout manager for the RecyclerView
@@ -71,7 +71,7 @@ public class TrunkActivity extends AppCompatActivity implements AddTrunkDialog.a
         resView.setLayoutManager(resViewLayMan);
 
         // Set View Adapter
-        adapt = new TrunkTestAdapter(trunkTests);
+        adapt = new UpperTestAdapter(upperTests);
         resView.setAdapter(adapt);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -92,20 +92,21 @@ public class TrunkActivity extends AppCompatActivity implements AddTrunkDialog.a
         classroomCollection = gradeCollection.document("Grade " + gradeNumber).collection(CLASS_COL);
         studentCollection = classroomCollection.document(classroomName).collection(STUDENT_COL);
         testCollection = studentCollection.document(studentName).collection(TEST_COL);
-        trunkTestCollection = testCollection.document(TEST_NAME).collection(TRUNK_COL);
+        upperTestCol = testCollection.document(TEST_NAME).collection(UPPER_COL);
 
         initializeTestResults();
+
     }
 
     public void initializeTestResults(){
         // Get the collection of flexibility tests
-        trunkTestCollection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        upperTestCol.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (DocumentSnapshot document : task.getResult()) {
-                        TrunkTest test = document.toObject(TrunkTest.class);
-                        trunkTests.add(test);
+                        UpperBodyTest test = document.toObject(UpperBodyTest.class);
+                        upperTests.add(test);
                         adapt.notifyDataSetChanged();
                     }
                 }
@@ -115,18 +116,20 @@ public class TrunkActivity extends AppCompatActivity implements AddTrunkDialog.a
 
     public void addTestResult(View view){
         // Create alert dialog for adding flex test results
-        AddTrunkDialog trunkDlog = new AddTrunkDialog();
-        trunkDlog.show(getSupportFragmentManager(), "newFlexTest");
+        AddUpperDialog upperDialog = new AddUpperDialog();
+        upperDialog.show(getSupportFragmentManager(), "newFlexTest");
     }
 
     @Override
-    public void onAddTruckTestClick(String result) {
-        TrunkTest newTest = new TrunkTest();
-        newTest.setTrunkLift(result);
+    public void onAddUpperTestClick(String pushUps, String pullUps, String armHang) {
+        UpperBodyTest newTest = new UpperBodyTest();
+        newTest.setPushUps(pushUps);
+        newTest.setPullUps(pullUps);
+        newTest.setArmHang(armHang);
 
-        trunkTests.add(newTest);
+        upperTests.add(newTest);
         adapt.notifyDataSetChanged();
 
-        trunkTestCollection.document(newTest.getDate()).set(newTest);
+        upperTestCol.document(newTest.getDate()).set(newTest);
     }
 }
