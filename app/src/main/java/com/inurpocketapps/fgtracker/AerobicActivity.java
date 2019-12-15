@@ -68,7 +68,7 @@ public class AerobicActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Initialize RecyclerView
-        resView = findViewById(R.id.flexResView);
+        resView = findViewById(R.id.aerobicResView);
         resView.setHasFixedSize(true);
 
         // Use a linear layout manager for the RecyclerView
@@ -76,7 +76,7 @@ public class AerobicActivity extends AppCompatActivity {
         resView.setLayoutManager(resViewLayMan);
 
         // Set View Adapter
-        //adapt = new FlexTestAdapter(flexTests, this);
+        adapt = new AerobicTestAdapter(aerobicTestList, this);
         resView.setAdapter(adapt);
 
         Bundle extras = getIntent().getExtras();
@@ -96,5 +96,4 @@ public class AerobicActivity extends AppCompatActivity {
         testCollection = studentCollection.document(studentName).collection(TEST_COL);
         flexTestCol = testCollection.document(TEST_NAME).collection(AEROBIC_COL);
     }
-
 }
