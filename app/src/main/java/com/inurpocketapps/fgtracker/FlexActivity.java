@@ -3,14 +3,24 @@ package com.inurpocketapps.fgtracker;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
-public class FlexActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class FlexActivity extends AppCompatActivity implements AddFlexDialog.addFlexTestListener {
 
     // Static Variables
     private static final String CLASS_COL = "CLASSES";
@@ -39,10 +49,31 @@ public class FlexActivity extends AppCompatActivity {
     private CollectionReference testCollection;
     private CollectionReference flexTestCol;
 
+    // Array to store all flexibility tests
+    private List<FlexibilityTest> flexTests = new ArrayList<>();
+
+    // View Holders
+    private RecyclerView resView;
+    private RecyclerView.Adapter adapt;
+    private RecyclerView.LayoutManager resViewLayMan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flex);
+
+        // Initialize RecyclerView
+        resView = findViewById(R.id.flexResView);
+        resView.setHasFixedSize(true);
+
+        // Use a linear layout manager for the RecyclerView
+        resViewLayMan = new LinearLayoutManager(this);
+        resView.setLayoutManager(resViewLayMan);
+
+        // Set View Adapter
+        adapt = new FlexTestAdapter(flexTests, this);
+        resView.setAdapter(adapt);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -68,11 +99,39 @@ public class FlexActivity extends AppCompatActivity {
     }
 
     public void addTestResult(View view){
-
+        // Create alert dialog for adding flex test results
+        AddFlexDialog flexDlog = new AddFlexDialog();
+        flexDlog.show(getSupportFragmentManager(), "newFlexTest");
     }
 
     public void initializeTestResults(){
+        // Get the collection of flexibility tests
+        flexTestCol.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        FlexibilityTest test = document.toObject(FlexibilityTest.class);
+                        flexTests.add(test);
+                        adapt.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
 
     }
 
+    @Override
+    public void onAddFlexTestClick(float lReach, float rReach, boolean lPass, boolean rPass) {
+        FlexibilityTest newTest = new FlexibilityTest();
+        newTest.setLeftPass(lPass);
+        newTest.setRightPass(rPass);
+        newTest.setSitAndReachLeft(Float.toString(lReach));
+        newTest.setSitAndReachRight(Float.toString(rReach));
+
+        flexTests.add(newTest);
+        adapt.notifyDataSetChanged();
+
+        flexTestCol.document(newTest.getDate()).set(newTest);
+    }
 }

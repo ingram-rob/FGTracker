@@ -166,7 +166,15 @@ public class StudentInfo extends AppCompatActivity implements AddStudentDialog.A
     }
 
     public void startFlexibilityActivity (View v) {
-
+        Intent stretch = new Intent(this, FlexActivity.class);
+        Bundle extras = new Bundle();
+        extras.putString("SCHOOL_NAME", schoolName);
+        extras.putString("USER_NAME", userName);
+        extras.putInt("GRADE_NUMBER", gradeNumber);
+        extras.putString("CLASS_NAME", classroomName);
+        extras.putString("STUDENT_NAME", studentName);
+        stretch.putExtras(extras);
+        this.startActivity(stretch);
     }
 
     public void startTrunkActivity (View v) {
@@ -319,10 +327,6 @@ public class StudentInfo extends AppCompatActivity implements AddStudentDialog.A
                 Log.e("FIREBASE", "Failed to change birthdate in document");
             }
         });
-    }
-
-    public void goToStretchTest(){
-        Intent stretch = new Intent(this, FlexActivity.class);
     }
 }
 

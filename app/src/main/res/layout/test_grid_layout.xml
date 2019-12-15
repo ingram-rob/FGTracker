@@ -48,7 +48,7 @@
         android:onClick="startFlexibilityActivity"
         android:text="@string/flexibility_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
         android:id="@+id/trunk"

@@ -1,15 +1,15 @@
 package com.inurpocketapps.fgtracker;
 
 public class FlexibilityTest extends FitnessTest {
-    int sitAndReachRight;
-    int sitAndReachLeft;
+    String sitAndReachRight;
+    String sitAndReachLeft;
     boolean leftPass;
     boolean rightPass;
 
     public FlexibilityTest() {
         date = getCurrentDate();
-        sitAndReachLeft = 0;
-        sitAndReachRight = 0;
+        sitAndReachLeft = "0";
+        sitAndReachRight = "0";
         leftPass = false;
         rightPass = false;
     }
@@ -22,19 +22,19 @@ public class FlexibilityTest extends FitnessTest {
         this.rightPass = rightPass;
     }
 
-    public void setSitAndReachLeft(int sitAndReachLeft) {
+    public void setSitAndReachLeft(String sitAndReachLeft) {
         this.sitAndReachLeft = sitAndReachLeft;
     }
 
-    public void setSitAndReachRight(int sitAndReachRight) {
+    public void setSitAndReachRight(String sitAndReachRight) {
         this.sitAndReachRight = sitAndReachRight;
     }
 
-    public int getSitAndReachLeft() {
+    public String getSitAndReachLeft() {
         return sitAndReachLeft;
     }
 
-    public int getSitAndReachRight() {
+    public String getSitAndReachRight() {
         return sitAndReachRight;
     }
 

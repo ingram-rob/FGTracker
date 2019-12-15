@@ -24,17 +24,6 @@ public class SchoolAdapter extends RecyclerView.Adapter <SchoolAdapter.SchoolVie
         this.username = user;
     }
 
-    /*@Override
-    public SimpleViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
-        // create a new view
-        TextView v = new TextView(parent.getContext());
-        v.setHeight(150);
-        v.setTextSize(25);
-        v.setPadding(50, 25, 0, 0);
-        SimpleViewHolder vh = new SimpleViewHolder(v);
-        return vh;
-    }*/
-
     @NonNull
     @Override
     public SchoolViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

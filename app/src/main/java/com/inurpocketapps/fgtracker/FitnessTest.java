@@ -24,7 +24,7 @@ public class FitnessTest {
     //this should be able to get the current date from the system
     public String getCurrentDate() {
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String currentDate = format.format(c.getTime());
         return currentDate;
     }
